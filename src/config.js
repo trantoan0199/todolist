@@ -1,1 +1,1 @@
-export const URL_API = `https://627db3ffb75a25d3f3aa79c6.mockapi.io`;
+export const URL_API = process.env.REACT_APP_API_URL || "http://localhost:3000"

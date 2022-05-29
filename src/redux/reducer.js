@@ -3,9 +3,9 @@
 //   isOpen: false,
 // };
 
-import { combineReducers } from "redux";
-import filtersReducer from "../components/Filters/filterSlice";
-import todoListReducer from "../components/FormTable/todosSlice";
+import { combineReducers } from "redux"
+import filtersReducer from "../components/Filters/filterSlice"
+import todoListReducer from "../components/FormTable/todosSlice"
 
 // const rootReducer = (state = initialState, action) => {
 //   switch (action.type) {
@@ -84,7 +84,7 @@ import todoListReducer from "../components/FormTable/todosSlice";
 
 const rootReducer = combineReducers({
   filters: filtersReducer,
-  todoList: todoListReducer,
-});
+  todoList: todoListReducer
+})
 
-export default rootReducer;
+export default rootReducer

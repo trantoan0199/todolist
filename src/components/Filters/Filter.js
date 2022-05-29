@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useState } from "react"
+import SearchIcon from "@mui/icons-material/Search"
+import AddIcon from "@mui/icons-material/Add"
 import {
   Box,
   Button,
   FormControlLabel,
   IconButton,
+  InputAdornment,
   InputBase,
   Modal,
   Paper,
   Radio,
   RadioGroup,
-} from "@mui/material";
-import CreateData from "../CreateData.js/CreateData.js";
-import { useDispatch } from "react-redux";
-import { searchFilterChange, statusFilterChange } from "../../redux/actions.js";
+  TextField
+} from "@mui/material"
+import CreateData from "../CreateData.js/CreateData.js"
+import { useDispatch } from "react-redux"
+import { searchFilterChange, statusFilterChange } from "../../redux/actions.js"
 
 const style = {
   position: "absolute",
@@ -25,103 +27,92 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
-};
+  p: 4
+}
 
-const Filters = (props) => {
-  const { open, handleOpen, handleClose, dataEdit, setDataEdit } = props;
-  const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState("All");
+const Filters = props => {
+  const { open, handleOpen, handleClose, dataEdit, setDataEdit } = props
+  const [search, setSearch] = useState("")
+  const [filters, setFilters] = useState("All")
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
+  const handleSearchChange = e => {
+    setSearch(e.target.value)
+  }
 
   const handleSearchSubmit = () => {
-    dispatch(searchFilterChange(search));
-    setSearch("");
-  };
+    dispatch(searchFilterChange(search))
+    setSearch("")
+  }
 
-  const handleFilterChange = (e) => {
-    setFilters(e.target.value);
-    dispatch(statusFilterChange(e.target.value));
-  };
+  const handleFilterChange = e => {
+    setFilters(e.target.value)
+    dispatch(statusFilterChange(e.target.value))
+  }
   return (
     <Box style={{ display: "block", margin: "auto" }}>
-      <Box
-        style={{ display: "flex", justifyContent: "center", margin: "10px 0" }}
-      >
-        <Paper
-          component="form"
-          sx={{
-            padding: "2px 4px",
-            display: "flex",
-            alignItems: "center",
-            width: 400,
-          }}
-        >
-          <InputBase
-            style={{ marginLeft: 1, flex: 1 }}
-            placeholder="Nhập từ khóa..."
-            value={search}
-            onChange={handleSearchChange}
+      <Box>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <TextField
+            label="Search"
+            id="outlined-start-adornment"
+            margin="dense"
+            size="small"
+            sx={{ mr: 2 }}
+            placeholder="Enter value"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
-          <IconButton
-            style={{ padding: 10 }}
-            aria-label="search"
+          <Button
+            variant="contained"
             color="primary"
-         //   onClick={() => handleSearchSubmit(search)}dispatch
+            startIcon={<AddIcon />}
+            onClick={handleOpen}
           >
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-      </Box>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          style={{ margin: "0 10px" }}
-          startIcon={<AddIcon />}
-          onClick={handleOpen}
+            Add work
+          </Button>
+        </Box>
+        <RadioGroup
+          sx={{ mt: 1 }}
+          row
+          value={filters}
+          onChange={handleFilterChange}
         >
-          Thêm Công Việc
-        </Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <CreateData
-              handleClose={handleClose}
-              dataEdit={dataEdit}
-              setDataEdit={setDataEdit}
-            />
-          </Box>
-        </Modal>
+          <FormControlLabel value="All" control={<Radio />} label="All" />
+          <FormControlLabel
+            value="Completed"
+            control={<Radio />}
+            label="Completed"
+          />
+          <FormControlLabel value="Todo" control={<Radio />} label="Todo" />
+        </RadioGroup>
       </Box>
-      <RadioGroup
-        row
-        // defaultValue="All"
-        style={{ display: "flex", justifyContent: "center" }}
-        value={filters}
-        onChange={handleFilterChange}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
-        <FormControlLabel value="All" control={<Radio />} label="All" />
-        <FormControlLabel
-          value="Completed"
-          control={<Radio />}
-          label="Completed"
-        />
-        <FormControlLabel value="Todo" control={<Radio />} label="Todo" />
-      </RadioGroup>
+        <Box sx={style}>
+          <CreateData
+            handleClose={handleClose}
+            dataEdit={dataEdit}
+            setDataEdit={setDataEdit}
+          />
+        </Box>
+      </Modal>
     </Box>
-  );
-};
+  )
+}
 
-Filters.propTypes = {};
+Filters.propTypes = {}
 
-export default Filters;
+export default Filters

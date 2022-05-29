@@ -1,5 +1,5 @@
-import React from "react";
-import { Typography } from "@mui/material";
+import React from "react"
+import { Typography } from "@mui/material"
 
 const Title = () => {
   return (
@@ -9,14 +9,14 @@ const Title = () => {
         fontSize: 30,
         color: "greenyellow",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "center"
       }}
     >
       To Do List
     </Typography>
-  );
-};
+  )
+}
 
-Title.propTypes = {};
+Title.propTypes = {}
 
-export default Title;
+export default Title

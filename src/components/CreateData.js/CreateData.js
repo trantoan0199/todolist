@@ -1,60 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 // import PropTypes from 'prop-types'
-import CancelIcon from "@mui/icons-material/Cancel";
-import SaveIcon from "@mui/icons-material/Save";
-import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { addData, editDataApi } from "../../redux/callApi";
-import { isEmpty } from "lodash";
+import CancelIcon from "@mui/icons-material/Cancel"
+import SaveIcon from "@mui/icons-material/Save"
+import { Box, Button, MenuItem, TextField, Typography } from "@mui/material"
+import { useDispatch } from "react-redux"
+import { addData, editDataApi } from "../../redux/callApi"
+import { isEmpty } from "lodash"
 const currencies = [
   {
     value: true,
-    label: "Completed",
+    label: "Completed"
   },
   {
     value: false,
-    label: "Todo",
-  },
-];
+    label: "Todo"
+  }
+]
 
-const CreateData = (props) => {
-  const { handleClose, dataEdit, setDataEdit } = props;
-  const [status, setStatus] = useState(false);
-  const [name, setName] = useState("");
-  const [id, setId] = useState('')
-  const dispatch = useDispatch();
+const CreateData = props => {
+  const { handleClose, dataEdit, setDataEdit } = props
+  const [status, setStatus] = useState(false)
+  const [name, setName] = useState("")
+  const [id, setId] = useState("")
+  const dispatch = useDispatch()
   useEffect(() => {
-    setName(dataEdit.name);
-    setStatus(dataEdit.status);
+    setName(dataEdit.name)
+    setStatus(dataEdit.status)
     setId(dataEdit.id)
-  }, [dataEdit]);
+  }, [dataEdit])
 
   const handleSubmit = () => {
-    handleClose && handleClose();
+    handleClose && handleClose()
     addData(dispatch, {
       id: id,
       name: name,
-      status: status,
-    });
-    setDataEdit({});
-  };
+      status: status
+    })
+    setDataEdit({})
+  }
   const handleSubmitEdit = () => {
     editDataApi(dispatch, {
       id: dataEdit.id,
       name: name,
-      status: status,
-    });
-    handleClose && handleClose();
-    setDataEdit({});
-  };
+      status: status
+    })
+    handleClose && handleClose()
+    setDataEdit({})
+  }
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
+  const handleNameChange = e => {
+    setName(e.target.value)
+  }
 
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-  };
+  const handleStatusChange = e => {
+    setStatus(e.target.value)
+  }
 
   return (
     <div>
@@ -77,15 +77,14 @@ const CreateData = (props) => {
         variant="outlined"
         style={{ width: 400, margin: 5 }}
       >
-        {currencies.map((option) => (
-          
+        {currencies.map(option => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
         ))}
       </TextField>
       <Box style={{ display: "flex", justifyContent: "space-between" }}>
-        {!isEmpty(dataEdit)? (
+        {!isEmpty(dataEdit) ? (
           <Button
             variant="contained"
             color="primary"
@@ -114,9 +113,9 @@ const CreateData = (props) => {
         </Button>
       </Box>
     </div>
-  );
-};
+  )
+}
 
-CreateData.propTypes = {};
+CreateData.propTypes = {}
 
-export default CreateData;
+export default CreateData

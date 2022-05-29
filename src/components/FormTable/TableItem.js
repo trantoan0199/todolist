@@ -1,32 +1,32 @@
-import React from "react";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
-import { Button, TableCell, TableRow } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { deleteDataApi, editStatusApi } from "../../redux/callApi";
+import React from "react"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
+import EditIcon from "@mui/icons-material/Edit"
+import { Button, TableCell, TableRow } from "@mui/material"
+import { useDispatch } from "react-redux"
+import { deleteDataApi, editStatusApi } from "../../redux/callApi"
 
-const TableItem = (props) => {
-  const { index, data, handleOpen, setDataEdit } = props;
+const TableItem = props => {
+  const { index, data, handleOpen, setDataEdit } = props
 
-  console.log("data", data);
+  console.log("data", data)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleToggleDelete = () => {
-    deleteDataApi(dispatch, data.id);
-  };
+    deleteDataApi(dispatch, data.id)
+  }
 
   const handleEdit = () => {
-    handleOpen();
+    handleOpen()
     setDataEdit({
       name: data.name,
       status: data.status,
-      id: data.id,
-    });
-  };
+      id: data.id
+    })
+  }
   const handleStatus = () => {
-    editStatusApi(dispatch, data);
-  };
+    editStatusApi(dispatch, data)
+  }
   return (
     <TableRow>
       <TableCell component="th" scope="row" align="center">
@@ -48,6 +48,7 @@ const TableItem = (props) => {
           // onClick={() => handleEdit(data)}
           color="success"
           startIcon={<EditIcon />}
+          sx={{ mr: 1 }}
         >
           Edit
         </Button>
@@ -61,9 +62,9 @@ const TableItem = (props) => {
         </Button>
       </TableCell>
     </TableRow>
-  );
-};
+  )
+}
 
-TableItem.propTypes = {};
+TableItem.propTypes = {}
 
-export default TableItem;
+export default TableItem

@@ -1,7 +1,4 @@
-import React, { useEffect } from "react";
-// import PropTypes from 'prop-types'
-import { HttpRequest } from "../../util/helper";
-// import { getDataApi } from "../../redux/actions";
+import React, { useState, useEffect } from "react"
 import {
   TableBody,
   TableCell,
@@ -10,28 +7,39 @@ import {
   TableHead,
   Table,
   Paper,
-} from "@mui/material";
-import TableItem from "./TableItem";
-import { useSelector, useDispatch } from "react-redux";
-import { todoListSelector } from "../../redux/selectors";
-import { callApi, fetchListTodo } from "../../redux/callApi";
+  LinearProgress
+} from "@mui/material"
+import TableItem from "./TableItem"
+import { useSelector, useDispatch } from "react-redux"
+import { todoListSelector } from "../../redux/selectors"
+import { fetchListTodo } from "../../redux/callApi"
 
 const FormTable = ({ handleOpen, setDataEdit }) => {
-  const dispatch = useDispatch();
-  const todoList = useSelector(todoListSelector);
+  const dispatch = useDispatch()
+  const todoList = useSelector(todoListSelector)
 
-  console.log("todoList", todoList);
+  const [loading, setLoading] = useState(false)
 
-  // const callApi = async () => {
-  //   const res = await HttpRequest.getList("/list");
-  //   dispatch(getDataApi(res.data));
-  //   console.log("data", res.data);
-  // };
   useEffect(() => {
-    fetchListTodo(dispatch);
-  }, []);
+    const fetchList = async () => {
+      setLoading(true)
+      try {
+        await fetchListTodo(dispatch)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchList()
+  }, [])
+
+  if (loading) {
+    return <LinearProgress />
+  }
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ mt: 2 }}>
       <Table style={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -54,9 +62,9 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}
 
-FormTable.propTypes = {};
+FormTable.propTypes = {}
 
-export default FormTable;
+export default FormTable

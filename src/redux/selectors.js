@@ -1,1 +1,1 @@
-export const todoListSelector = (state) => state.todoList.list;
+export const todoListSelector = state => state.todoList.list
