@@ -7,9 +7,7 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
-  InputBase,
   Modal,
-  Paper,
   Radio,
   RadioGroup,
   TextField

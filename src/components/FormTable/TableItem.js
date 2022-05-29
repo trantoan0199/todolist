@@ -1,12 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import EditIcon from "@mui/icons-material/Edit"
-import { Button, TableCell, TableRow } from "@mui/material"
+import { Button, TableCell, TableRow, CircularProgress } from "@mui/material"
 import { useDispatch } from "react-redux"
 import { deleteDataApi, editStatusApi } from "../../redux/callApi"
 
 const TableItem = props => {
   const { index, data, handleOpen, setDataEdit } = props
+
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -22,8 +24,15 @@ const TableItem = props => {
       status: data.status
     })
   }
-  const handleStatus = () => {
-    editStatusApi(dispatch, data)
+  const handleStatus = async () => {
+    try {
+      setLoading(true)
+      await editStatusApi(dispatch, { ...data, status: !data.status })
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
   }
   return (
     <TableRow>
@@ -36,6 +45,15 @@ const TableItem = props => {
           variant="outlined"
           onClick={handleStatus}
           color={data.status ? "error" : "primary"}
+          disabled={loading}
+          startIcon={
+            loading ? (
+              <CircularProgress
+                size={20}
+                color={data.status ? "error" : "primary"}
+              />
+            ) : null
+          }
         >
           {data.status ? "Completed" : "Todo"}
         </Button>

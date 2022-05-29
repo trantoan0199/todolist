@@ -32,6 +32,6 @@ export const editDataApi = async (dispatch, data) => {
 }
 
 export const editStatusApi = async (dispatch, data) => {
-  dispatch(updateStatus(data))
   await HttpRequest.editStatus(data)
+  dispatch(updateStatus(data))
 }
