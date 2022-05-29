@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container, Paper } from "@mui/material";
+import Title from "./components/Title";
+import Filters from "./components/Filters/Filter";
+import FormTable from "./components/FormTable/FormTable";
+import { useState } from "react";
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const [dataEdit,setDataEdit] = useState({})
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setDataEdit({
+      // name: '',
+      // status: false
+    })
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fixed style={{ marginTop: "40px" }}>
+      <Title />
+      <Paper>
+        <Filters dataEdit={dataEdit} setDataEdit={setDataEdit} open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose} />
+        <FormTable handleOpen={handleOpen} setDataEdit={setDataEdit}/>
+      </Paper>
+    </Container>
   );
 }
 
