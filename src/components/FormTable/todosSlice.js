@@ -1,4 +1,10 @@
-import { SET_LIST_TODO } from "../../redux/actions"
+import {
+  ADD_DATA_TODO,
+  DELETE_DATA_TODO,
+  EDIT_DATA_TODO,
+  EDIT_STATUS_TODO,
+  SET_LIST_TODO
+} from "../../redux/actions"
 
 const initialState = {
   list: [],
@@ -12,12 +18,18 @@ const todoListReducer = (state = initialState, action) => {
         ...state,
         list: action.payload
       }
-    case "todoList/addData":
+    case ADD_DATA_TODO:
       return {
         ...state,
         list: [...state.list, action.payload]
       }
-    case "todoList/editItem":
+    case DELETE_DATA_TODO:
+      const newData = state.list.filter(todo => todo.id !== action.payload)
+      return {
+        ...state,
+        list: newData
+      }
+    case EDIT_DATA_TODO:
       const newDataEdit = state.list.map(todo => {
         if (todo.id === action.payload.id) {
           return action.payload
@@ -28,11 +40,17 @@ const todoListReducer = (state = initialState, action) => {
         ...state,
         list: newDataEdit
       }
-    case "todoList/deleteItem":
-      const newData = state.products.filter(todo => todo.id !== action.payload)
+    case EDIT_STATUS_TODO:
+      const newEditStatus = state.list.map(todo => {
+        if (todo.id === action.payload.id) {
+          todo.status = !todo.status
+          return todo
+        }
+        return todo
+      })
       return {
         ...state,
-        list: newData
+        list: newEditStatus
       }
     default:
       return state

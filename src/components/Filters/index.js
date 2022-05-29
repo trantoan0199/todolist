@@ -14,7 +14,7 @@ import {
   RadioGroup,
   TextField
 } from "@mui/material"
-import CreateData from "../CreateData.js/CreateData.js"
+import CreateData from "../CreateData.js"
 import { useDispatch } from "react-redux"
 import { searchFilterChange, statusFilterChange } from "../../redux/actions.js"
 

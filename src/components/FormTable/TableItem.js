@@ -8,8 +8,6 @@ import { deleteDataApi, editStatusApi } from "../../redux/callApi"
 const TableItem = props => {
   const { index, data, handleOpen, setDataEdit } = props
 
-  console.log("data", data)
-
   const dispatch = useDispatch()
 
   const handleToggleDelete = () => {
@@ -19,9 +17,9 @@ const TableItem = props => {
   const handleEdit = () => {
     handleOpen()
     setDataEdit({
+      id: data.id,
       name: data.name,
-      status: data.status,
-      id: data.id
+      status: data.status
     })
   }
   const handleStatus = () => {
@@ -36,7 +34,7 @@ const TableItem = props => {
       <TableCell align="center">
         <Button
           variant="outlined"
-          // onClick={handleStatus}
+          onClick={handleStatus}
           color={data.status ? "error" : "primary"}
         >
           {data.status ? "Completed" : "Todo"}
@@ -45,7 +43,7 @@ const TableItem = props => {
       <TableCell align="center">
         <Button
           variant="contained"
-          // onClick={() => handleEdit(data)}
+          onClick={() => handleEdit()}
           color="success"
           startIcon={<EditIcon />}
           sx={{ mr: 1 }}
@@ -56,7 +54,7 @@ const TableItem = props => {
           variant="contained"
           color="error"
           endIcon={<DeleteForeverIcon />}
-          // onClick={() => handleToggleDelete(data.id)}
+          onClick={() => handleToggleDelete(data.id)}
         >
           Delete
         </Button>

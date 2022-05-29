@@ -6,20 +6,20 @@ const getList = () => {
   return Axios.get(TODO_LIST_URL)
 }
 
-const create = (url, data) => {
-  return Axios.post(`${URL_API}${url}`, data)
+const create = data => {
+  return Axios.post(TODO_LIST_URL, data)
 }
 
 const deleteItem = id => {
   return Axios.delete(`${TODO_LIST_URL}/${id}`)
 }
 
-const update = (url, id, data) => {
-  return Axios.put(`${URL_API}${url}/${id}`, data)
+const update = data => {
+  return Axios.put(`${TODO_LIST_URL}/${data.id}`, data)
 }
 
-const editStatus = (url, data) => {
-  return Axios.put(`${URL_API}${url}/${data.id}`, data)
+const editStatus = data => {
+  return Axios.put(`${TODO_LIST_URL}/${data.id}`, data)
 }
 
 const search = (url, value) => {

@@ -46,7 +46,7 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
             <TableCell align="center">STT</TableCell>
             <TableCell align="center">NAME</TableCell>
             <TableCell align="center">STATUS</TableCell>
-            <TableCell align="center">ACTION</TableCell>
+            <TableCell align="center"> ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

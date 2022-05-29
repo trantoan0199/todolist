@@ -59,7 +59,7 @@ const CreateData = props => {
   return (
     <div>
       <Typography component="h2">
-        {isEmpty(dataEdit) ? "Thêm Công Việc:" : "Cập Nhật Công Việc:"}
+        {isEmpty(dataEdit) ? "Add Work:" : "Update Work:"}
       </Typography>
       <TextField
         label="Name:"
@@ -89,7 +89,7 @@ const CreateData = props => {
             variant="contained"
             color="primary"
             startIcon={<SaveIcon />}
-            // onClick={handleSubmitEdit}
+            onClick={handleSubmitEdit}
           >
             Update
           </Button>

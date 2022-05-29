@@ -14,7 +14,7 @@ export const fetchListTodo = async dispatch => {
 
 export const addData = async (dispatch, data) => {
   try {
-    const res = await HttpRequest.create("/list", data)
+    const res = await HttpRequest.create(data)
     dispatch(createData(res.data))
   } catch (err) {
     console.log(err)
@@ -22,16 +22,16 @@ export const addData = async (dispatch, data) => {
 }
 
 export const deleteDataApi = async (dispatch, id) => {
-  await HttpRequest.deleteItem("/list", id)
+  await HttpRequest.deleteItem(id)
   dispatch(deleteData(id))
 }
 
 export const editDataApi = async (dispatch, data) => {
-  await HttpRequest.update("/list", data.id, data)
+  await HttpRequest.update(data)
   dispatch(editData(data))
 }
 
 export const editStatusApi = async (dispatch, data) => {
-  await HttpRequest.editStatus("/list", data.id, data)
   dispatch(updateStatus(data))
+  await HttpRequest.editStatus(data)
 }
