@@ -4,6 +4,8 @@ export const ADD_DATA_TODO = "todo/ADD_DATA_TODO"
 export const DELETE_DATA_TODO = "todo/DELETE_DATA_TODO"
 export const EDIT_DATA_TODO = "todo/EDIT_DATA_TODO"
 export const EDIT_STATUS_TODO = "todo/EDIT_STATUS_TODO"
+export const SEARCH_NAME_FILTER = "filter/SEARCH_NAME_FILTER"
+export const STATUS_NAME_FILTER = "filter/STATUS_NAME_FILTER"
 
 export const setListTodo = payload => {
   return {
@@ -42,14 +44,14 @@ export const updateStatus = status => {
 
 export const searchFilterChange = text => {
   return {
-    type: "filters/searchFilter",
+    type: SEARCH_NAME_FILTER,
     payload: text
   }
 }
 
 export const statusFilterChange = value => {
   return {
-    type: "filters/statusFilterChange",
+    type: STATUS_NAME_FILTER,
     payload: value
   }
 }

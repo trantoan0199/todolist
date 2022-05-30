@@ -22,12 +22,12 @@ const editStatus = data => {
   return Axios.put(`${TODO_LIST_URL}/${data.id}`, data)
 }
 
-const search = (url, value) => {
-  return Axios.get(`${URL_API}${url}?search=${value}`)
+const search = value => {
+  return Axios.get(`${TODO_LIST_URL}?search=${value}`)
 }
 
-const sortName = url => {
-  return Axios.get(`${URL_API}${url}?sortBy=name&order=asc`)
+const status = value => {
+  return Axios.get(`${TODO_LIST_URL}?status=${value}`)
 }
 
 export const HttpRequest = {
@@ -37,5 +37,5 @@ export const HttpRequest = {
   update,
   editStatus,
   search,
-  sortName
+  status
 }

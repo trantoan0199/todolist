@@ -1,3 +1,5 @@
+import { SEARCH_NAME_FILTER, STATUS_NAME_FILTER } from "../../redux/actions"
+
 const initState = {
   search: "",
   status: "All"
@@ -5,12 +7,12 @@ const initState = {
 
 const filtersReducer = (state = initState, action) => {
   switch (action.type) {
-    case "filters/searchFilter":
+    case SEARCH_NAME_FILTER:
       return {
         ...state,
         search: action.payload
       }
-    case "filters/statusFilterChange":
+    case STATUS_NAME_FILTER:
       return {
         ...state,
         status: action.payload

@@ -11,12 +11,12 @@ import {
 } from "@mui/material"
 import TableItem from "./TableItem"
 import { useSelector, useDispatch } from "react-redux"
-import { todoListSelector } from "../../redux/selectors"
+import { todosRemainingSelector } from "../../redux/selectors"
 import { fetchListTodo } from "../../redux/callApi"
 
 const FormTable = ({ handleOpen, setDataEdit }) => {
   const dispatch = useDispatch()
-  const todoList = useSelector(todoListSelector)
+  const todoList = useSelector(todosRemainingSelector)
 
   const [loading, setLoading] = useState(false)
 
@@ -31,7 +31,6 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
         setLoading(false)
       }
     }
-
     fetchList()
   }, [])
 

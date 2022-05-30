@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
+  LinearProgress,
   Modal,
   Radio,
   RadioGroup,
@@ -14,7 +15,7 @@ import {
 } from "@mui/material"
 import CreateData from "../CreateData.js"
 import { useDispatch } from "react-redux"
-import { searchFilterChange, statusFilterChange } from "../../redux/actions.js"
+import { searchFilter, statusFilter } from "../../redux/callApi.js"
 
 const style = {
   position: "absolute",
@@ -31,22 +32,32 @@ const style = {
 const Filters = props => {
   const { open, handleOpen, handleClose, dataEdit, setDataEdit } = props
   const [search, setSearch] = useState("")
-  const [filters, setFilters] = useState("All")
+  const [status, setStatus] = useState("All")
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
 
-  const handleSearchChange = e => {
+  const handleSearchFilterChange = e => {
     setSearch(e.target.value)
+    searchFilter(dispatch, e.target.value)
   }
 
-  const handleSearchSubmit = () => {
-    dispatch(searchFilterChange(search))
-    setSearch("")
+  const handleFilterChange = async e => {
+    try {
+      setLoading(true)
+      setStatus(e.target.value)
+      await statusFilter(dispatch, e.target.value)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const handleFilterChange = e => {
-    setFilters(e.target.value)
-    dispatch(statusFilterChange(e.target.value))
+  if (loading) {
+    if (status === "All") return <LinearProgress />
+    if (status === "Completed") return <LinearProgress color="error" />
+    return <LinearProgress color="success" />
   }
   return (
     <Box style={{ display: "block", margin: "auto" }}>
@@ -54,6 +65,8 @@ const Filters = props => {
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <TextField
             label="Search"
+            value={search}
+            onChange={handleSearchFilterChange}
             id="outlined-start-adornment"
             margin="dense"
             size="small"
@@ -81,7 +94,7 @@ const Filters = props => {
         <RadioGroup
           sx={{ mt: 1 }}
           row
-          value={filters}
+          value={status}
           onChange={handleFilterChange}
         >
           <FormControlLabel value="All" control={<Radio />} label="All" />
@@ -93,12 +106,7 @@ const Filters = props => {
           <FormControlLabel value="Todo" control={<Radio />} label="Todo" />
         </RadioGroup>
       </Box>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <CreateData
             handleClose={handleClose}

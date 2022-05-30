@@ -4,7 +4,9 @@ import {
   deleteData,
   editData,
   updateStatus,
-  setListTodo
+  setListTodo,
+  searchFilterChange,
+  statusFilterChange
 } from "./actions"
 
 export const fetchListTodo = async dispatch => {
@@ -34,4 +36,14 @@ export const editDataApi = async (dispatch, data) => {
 export const editStatusApi = async (dispatch, data) => {
   await HttpRequest.editStatus(data)
   dispatch(updateStatus(data))
+}
+
+export const searchFilter = async (dispatch, text) => {
+  await HttpRequest.search(text)
+  dispatch(searchFilterChange(text))
+}
+
+export const statusFilter = async (dispatch, value) => {
+  await HttpRequest.status(value)
+  dispatch(statusFilterChange(value))
 }
