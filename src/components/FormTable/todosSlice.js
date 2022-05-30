@@ -4,7 +4,7 @@ import {
   EDIT_DATA_TODO,
   EDIT_STATUS_TODO,
   SET_LIST_TODO
-} from "../../redux/actions"
+} from "redux/actions"
 
 const initialState = {
   list: [],

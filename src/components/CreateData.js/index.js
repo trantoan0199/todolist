@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react"
-// import PropTypes from 'prop-types'
 import CancelIcon from "@mui/icons-material/Cancel"
 import SaveIcon from "@mui/icons-material/Save"
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material"
 import { useDispatch } from "react-redux"
-import { addData, editDataApi } from "../../redux/callApi"
+import { addData, editDataApi } from "redux/callApi"
 import { isEmpty } from "lodash"
 const currencies = [
   {

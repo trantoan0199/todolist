@@ -1,5 +1,5 @@
 import Axios from "axios"
-import { URL_API } from "../config"
+import { URL_API } from "config"
 
 const TODO_LIST_URL = `${URL_API}/list`
 const getList = () => {

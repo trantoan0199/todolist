@@ -1,7 +1,6 @@
 import { Box, ThemeProvider, createTheme } from "@mui/material"
-// import Title from "./components/Title"
-import Filters from "./components/Filters/"
-import FormTable from "./components/FormTable"
+import Filters from "components/Filters"
+import FormTable from "components/FormTable"
 import { useState } from "react"
 import "./App.css"
 

@@ -1,4 +1,4 @@
-import { SEARCH_NAME_FILTER, STATUS_NAME_FILTER } from "../../redux/actions"
+import { SEARCH_NAME_FILTER, STATUS_NAME_FILTER } from "redux/actions"
 
 const initState = {
   search: "",

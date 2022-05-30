@@ -13,7 +13,7 @@ import {
   DialogActions
 } from "@mui/material"
 import { useDispatch } from "react-redux"
-import { deleteDataApi, editStatusApi } from "../../redux/callApi"
+import { deleteDataApi, editStatusApi } from "redux/callApi"
 
 const TableItem = props => {
   const { index, data, handleOpen, setDataEdit } = props

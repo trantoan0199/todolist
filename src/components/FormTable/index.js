@@ -11,8 +11,8 @@ import {
 } from "@mui/material"
 import TableItem from "./TableItem"
 import { useSelector, useDispatch } from "react-redux"
-import { todosRemainingSelector } from "../../redux/selectors"
-import { fetchListTodo } from "../../redux/callApi"
+import { todosRemainingSelector } from "redux/selectors"
+import { fetchListTodo } from "redux/callApi"
 
 const FormTable = ({ handleOpen, setDataEdit }) => {
   const dispatch = useDispatch()

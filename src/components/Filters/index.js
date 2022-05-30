@@ -13,9 +13,9 @@ import {
   RadioGroup,
   TextField
 } from "@mui/material"
-import CreateData from "../CreateData.js"
 import { useDispatch } from "react-redux"
-import { searchFilter, statusFilter } from "../../redux/callApi.js"
+import { searchFilter, statusFilter } from "redux/callApi"
+import CreateData from "components/CreateData.js"
 
 const style = {
   position: "absolute",
