@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import SearchIcon from "@mui/icons-material/Search"
 import AddIcon from "@mui/icons-material/Add"
 import {
@@ -34,12 +34,23 @@ const Filters = props => {
   const [search, setSearch] = useState("")
   const [status, setStatus] = useState("All")
   const [loading, setLoading] = useState(false)
+  const typingSearch = useRef(null)
 
   const dispatch = useDispatch()
 
   const handleSearchFilterChange = e => {
-    setSearch(e.target.value)
-    searchFilter(dispatch, e.target.value)
+    const value = e.target.value
+    setSearch(value)
+
+    //DEBOUNCE
+    //set--100--clear, set--300-submit
+    if (typingSearch.current) {
+      clearTimeout(typingSearch.current)
+    }
+
+    typingSearch.current = setTimeout(() => {
+      searchFilter(dispatch, value)
+    }, 300)
   }
 
   const handleFilterChange = async e => {
