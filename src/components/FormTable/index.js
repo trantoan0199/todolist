@@ -7,7 +7,9 @@ import {
   TableHead,
   Table,
   Paper,
-  LinearProgress
+  LinearProgress,
+  Box,
+  TablePagination
 } from "@mui/material"
 import TableItem from "./TableItem"
 import { useSelector, useDispatch } from "react-redux"
@@ -17,6 +19,8 @@ import { fetchListTodo } from "redux/callApi"
 const FormTable = ({ handleOpen, setDataEdit }) => {
   const dispatch = useDispatch()
   const todoList = useSelector(todosRemainingSelector)
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const [loading, setLoading] = useState(false)
 
@@ -34,22 +38,35 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
     fetchList()
   }, [])
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = e => {
+    setRowsPerPage(parseInt(e.target.value, 10))
+    setPage(0)
+  }
+
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - todoList.length) : 0
+
   if (loading) {
     return <LinearProgress />
   }
   return (
-    <TableContainer component={Paper} sx={{ mt: 2 }}>
-      <Table style={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">STT</TableCell>
-            <TableCell align="center">NAME</TableCell>
-            <TableCell align="center">STATUS</TableCell>
-            <TableCell align="center"> ACTION</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {todoList.map((todo, index) => (
+    <Box>
+      <TableContainer component={Paper} sx={{ mt: 2 }}>
+        <Table style={{ minWidth: 550 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">STT</TableCell>
+              <TableCell align="center">NAME</TableCell>
+              <TableCell align="center">STATUS</TableCell>
+              <TableCell align="center"> ACTION</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* {todoList.map((todo, index) => (
             <TableItem
               key={index}
               setDataEdit={setDataEdit}
@@ -57,13 +74,37 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
               data={todo}
               index={index + 1}
             />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          ))} */}
+            {todoList
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((todo, index) => (
+                <TableItem
+                  key={index}
+                  setDataEdit={setDataEdit}
+                  handleOpen={handleOpen}
+                  data={todo}
+                  index={index + 1}
+                />
+              ))}
+            {emptyRows > 0 && (
+              <TableRow>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={todoList.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Box>
   )
 }
-
-FormTable.propTypes = {}
 
 export default FormTable
