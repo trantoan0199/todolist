@@ -75,6 +75,7 @@ const Filters = props => {
       <Box>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <TextField
+            autoComplete="off"
             label="Search"
             value={search}
             onChange={handleSearchFilterChange}

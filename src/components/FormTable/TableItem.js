@@ -54,7 +54,7 @@ const TableItem = props => {
     }
   }
   return (
-    <TableRow>
+    <TableRow hover>
       <TableCell component="th" scope="row" align="center">
         {index}
       </TableCell>

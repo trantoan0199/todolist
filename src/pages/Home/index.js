@@ -7,6 +7,7 @@ import ResponsiveAppBar from "components/ResponsiveAppBar"
 export default function Home(props) {
   const [open, setOpen] = useState(false)
   const [dataEdit, setDataEdit] = useState({})
+
   const handleOpen = () => {
     setOpen(true)
   }
@@ -19,7 +20,7 @@ export default function Home(props) {
   return (
     <>
       <ResponsiveAppBar {...props} />
-      <Box maxWidth={1000} margin="auto" px={2}>
+      <Box maxWidth={1000} margin="auto" px={2} mt={3}>
         <React.Fragment>
           <Filters
             dataEdit={dataEdit}

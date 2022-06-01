@@ -14,6 +14,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"]
 export default function User({ user, signOut }) {
   const [anchorElUser, setAnchorElUser] = useState(null)
 
+  console.log(signOut)
+
   const handleOpenUserMenu = e => {
     setAnchorElUser(e.currentTarget)
   }
@@ -70,7 +72,9 @@ export default function User({ user, signOut }) {
             >
               {settings.map(setting => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" onClick={signOut}>
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
