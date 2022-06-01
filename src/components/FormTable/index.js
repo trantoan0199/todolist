@@ -66,15 +66,6 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {todoList.map((todo, index) => (
-            <TableItem
-              key={index}
-              setDataEdit={setDataEdit}
-              handleOpen={handleOpen}
-              data={todo}
-              index={index + 1}
-            />
-          ))} */}
             {todoList
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((todo, index) => (
