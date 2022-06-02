@@ -14,8 +14,6 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"]
 export default function User({ user, signOut }) {
   const [anchorElUser, setAnchorElUser] = useState(null)
 
-  console.log(signOut)
-
   const handleOpenUserMenu = e => {
     setAnchorElUser(e.currentTarget)
   }

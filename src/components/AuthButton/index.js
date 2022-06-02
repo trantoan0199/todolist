@@ -9,7 +9,7 @@ export default function AuthButton({ signInWithGoogle }) {
   return (
     <React.Fragment>
       <Button onClick={handleLogin} variant="contained">
-        Login with google Authentication
+        login with google
       </Button>
     </React.Fragment>
   )

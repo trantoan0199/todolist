@@ -20,18 +20,19 @@ import GoogleIcon from "@mui/icons-material/Google"
 import AutorenewIcon from "@mui/icons-material/Autorenew"
 import PersonIcon from "@mui/icons-material/Person"
 import VisibilityIcon from "@mui/icons-material/Visibility"
+import AuthButton from "components/AuthButton"
 
 const style = {
-  backgroundImage: `url(${"https://cdnimg.vietnamplus.vn/t870/Uploaded/ngtnnn/2017_08_13/1308phomay.jpg)"}`,
+  backgroundImage: `url(${"https://img.idesign.vn/2010/11/anh_trang_den_04.jpg"})`,
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
   height: "100vh",
   alignItems: "center",
-  justifyContent: "center",
   display: "flex"
 }
 
 export default function Login({ signInWithGoogle, signOut, user }) {
+  console.log({ signInWithGoogle, signOut, user })
   if (user) {
     return <Navigate to="/" />
   }
@@ -39,11 +40,11 @@ export default function Login({ signInWithGoogle, signOut, user }) {
     <div style={style}>
       <Container
         sx={{
-          // background: "red",
           height: "80%",
           width: "40%",
-          display: "block",
-          m: "auto"
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
         }}
       >
         <Typography
@@ -55,33 +56,53 @@ export default function Login({ signInWithGoogle, signOut, user }) {
             height: 50,
             textTransform: "uppercase",
             color: "#00246D",
-            textShadow: "2px 0.5px #fff"
+            textShadow: "2px 0.5px #fff",
+            margin: "20px 0"
           }}
         >
           login form
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <ButtonGroup variant="contained" sx={{ width: 235 }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "109%"
+          }}
+        >
+          <ButtonGroup variant="contained" sx={{ width: "45%" }}>
             <Button size="small">
               <FacebookIcon />
             </Button>
             <Button size="small">login with facebook</Button>
           </ButtonGroup>
-          <ButtonGroup variant="contained" sx={{ width: 235 }}>
+          <ButtonGroup variant="contained" sx={{ width: "45%" }}>
             <Button size="small">
               <GoogleIcon />
             </Button>
-            <Button size="small">login with google</Button>
+            <Button size="small" sx={{ width: "100%" }}>
+              <AuthButton
+                signInWithGoogle={signInWithGoogle}
+                signOut={signOut}
+                user={user}
+              />
+            </Button>
           </ButtonGroup>
         </Box>
 
         <AutorenewIcon
-          sx={{ background: "#fff", fontSize: 35, borderRadius: "50%" }}
+          sx={{
+            background: "#fff",
+            fontSize: 35,
+            borderRadius: "50%",
+            mt: 2,
+            mb: 3,
+            color: "#877474"
+          }}
         />
 
         <FormControl
-          sx={{ m: 1, width: "25ch", background: "#fff" }}
+          sx={{ width: "110%", background: "#DEDEDE" }}
           variant="outlined"
           autoComplete="off"
         >
@@ -90,7 +111,7 @@ export default function Login({ signInWithGoogle, signOut, user }) {
             endAdornment={
               <InputAdornment position="end">
                 <IconButton edge="end" disabled>
-                  <PersonIcon />
+                  <PersonIcon sx={{ color: "#0D7BF9" }} />
                 </IconButton>
               </InputAdornment>
             }
@@ -98,7 +119,7 @@ export default function Login({ signInWithGoogle, signOut, user }) {
           />
         </FormControl>
         <FormControl
-          sx={{ m: 1, width: "25ch", background: "#fff" }}
+          sx={{ mt: 3, width: "110%", background: "#DEDEDE" }}
           variant="outlined"
           autoComplete="off"
         >
@@ -115,7 +136,16 @@ export default function Login({ signInWithGoogle, signOut, user }) {
             label="Password"
           />
         </FormControl>
-        <Box>
+        <Box
+          sx={{
+            justifyContent: "space-between",
+            display: "flex",
+            alignItems: "center",
+            width: "110%",
+            color: "#CCCED0",
+            margin: "15px 0"
+          }}
+        >
           <FormControlLabel
             control={<Checkbox defaultChecked />}
             label="Remember me"
@@ -125,12 +155,12 @@ export default function Login({ signInWithGoogle, signOut, user }) {
         <Button
           variant="contained"
           size="large"
-          sx={{ width: 500, ml: "-15px" }}
+          sx={{ width: "110%", backgroundColor: "#264E79" }}
         >
           login
         </Button>
-        <Typography>
-          Not a member?<span>Sign up now!</span>
+        <Typography sx={{ marginTop: "15px", color: "#d2d7df" }}>
+          Not a member?<span style={{ color: "#055EBF" }}>Sign up now!</span>
         </Typography>
       </Container>
       {/* <Box maxWidth={1000} margin="auto" px={2}>
