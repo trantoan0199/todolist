@@ -13,49 +13,49 @@ import {
 } from "@mui/material"
 import TableItem from "./TableItem"
 import { useSelector, useDispatch } from "react-redux"
-import { todosRemainingSelector } from "redux/selectors"
+import { todosRemainingSelector, totalTodoListSelector } from "redux/selectors"
 import { fetchListTodo } from "redux/callApi"
+import queryString from "query-string"
+import { useLocation } from "react-router"
+import { useNavigate } from "react-router"
 
 const FormTable = ({ handleOpen, setDataEdit }) => {
   const dispatch = useDispatch()
   const todoList = useSelector(todosRemainingSelector)
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
+  const total = useSelector(totalTodoListSelector)
 
   const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(1)
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const fetchList = async params => {
+    setLoading(true)
+    try {
+      await fetchListTodo(dispatch, params)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchList = async () => {
-      setLoading(true)
-      try {
-        await fetchListTodo(dispatch)
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchList()
-  }, [])
+    const params = queryString.parse(location.search)
+    fetchList(params)
+  }, [location])
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
+  const handleChangePage = (event, page) => {
+    setPage(page)
+    const params = { page: page, limit: 10 }
+    navigate(`?${queryString.stringify(params)}`)
   }
 
-  const handleChangeRowsPerPage = e => {
-    setRowsPerPage(parseInt(e.target.value, 10))
-    setPage(0)
-  }
-
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - todoList.length) : 0
-
-  if (loading) {
-    return <LinearProgress />
-  }
   return (
     <Box>
       <TableContainer component={Paper} sx={{ mt: 2 }}>
+        {loading && <LinearProgress />}
         <Table style={{ minWidth: 550 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -66,9 +66,8 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {todoList
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((todo, index) => (
+            {!loading &&
+              todoList.map((todo, index) => (
                 <TableItem
                   key={index}
                   setDataEdit={setDataEdit}
@@ -77,22 +76,15 @@ const FormTable = ({ handleOpen, setDataEdit }) => {
                   index={index + 1}
                 />
               ))}
-            {emptyRows > 0 && (
-              <TableRow>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={todoList.length}
-        rowsPerPage={rowsPerPage}
+        count={total}
+        rowsPerPage={5}
         page={page}
         onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
   )

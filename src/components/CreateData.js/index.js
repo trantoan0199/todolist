@@ -63,9 +63,11 @@ const CreateData = props => {
       <TextField
         label="Name:"
         variant="outlined"
-        style={{ width: 400, margin: 5 }}
+        style={{ width: 400 }}
         onChange={handleNameChange}
         value={name}
+        size="small"
+        margin="dense"
       />
       <TextField
         id="outlined-select-currency"
@@ -74,7 +76,9 @@ const CreateData = props => {
         value={status}
         onChange={handleStatusChange}
         variant="outlined"
-        style={{ width: 400, margin: 5 }}
+        style={{ width: 400 }}
+        margin="dense"
+        size="small"
       >
         {currencies.map(option => (
           <MenuItem key={option.value} value={option.value}>
@@ -82,7 +86,7 @@ const CreateData = props => {
           </MenuItem>
         ))}
       </TextField>
-      <Box style={{ display: "flex", justifyContent: "space-between" }}>
+      <Box display="flex" justifyContent="space-between" mt={2}>
         {!isEmpty(dataEdit) ? (
           <Button
             variant="contained"

@@ -65,11 +65,6 @@ const Filters = props => {
     }
   }
 
-  if (loading) {
-    if (status === "All") return <LinearProgress />
-    if (status === "Completed") return <LinearProgress color="error" />
-    return <LinearProgress color="success" />
-  }
   return (
     <Box style={{ display: "block", margin: "auto" }}>
       <Box>

@@ -6,12 +6,16 @@ import {
   updateStatus,
   setListTodo,
   searchFilterChange,
-  statusFilterChange
+  statusFilterChange,
+  setTotalListTodo
 } from "./actions"
 
-export const fetchListTodo = async dispatch => {
-  const res = await HttpRequest.getList()
-  dispatch(setListTodo(res.data))
+export const fetchListTodo = async (dispatch, params) => {
+  const {
+    data: { data, total }
+  } = await HttpRequest.getList(params)
+  dispatch(setListTodo(data))
+  dispatch(setTotalListTodo(total))
 }
 
 export const addData = async (dispatch, data) => {

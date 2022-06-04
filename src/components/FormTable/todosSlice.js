@@ -3,11 +3,13 @@ import {
   DELETE_DATA_TODO,
   EDIT_DATA_TODO,
   EDIT_STATUS_TODO,
-  SET_LIST_TODO
+  SET_LIST_TODO,
+  SET_TOTAL_LIST_DODO
 } from "redux/actions"
 
 const initialState = {
   list: [],
+  total: 0,
   loading: false
 }
 
@@ -17,6 +19,11 @@ const todoListReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload
+      }
+    case SET_TOTAL_LIST_DODO:
+      return {
+        ...state,
+        total: action.payload
       }
     case ADD_DATA_TODO:
       return {

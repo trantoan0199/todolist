@@ -13,7 +13,6 @@ import AppleIcon from "@mui/icons-material/Apple"
 import MenuIcon from "@mui/icons-material/Menu"
 import User from "components/User"
 import React, { useState } from "react"
-import { Navigate } from "react-router"
 
 const pages = ["Products", "Contact", "Blog"]
 
@@ -28,9 +27,6 @@ function ResponsiveAppBar(props) {
     setAnchorElNav(null)
   }
 
-  if (!props.user) {
-    return <Navigate to="/login" />
-  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">

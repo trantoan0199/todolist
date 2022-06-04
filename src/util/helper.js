@@ -2,8 +2,8 @@ import Axios from "axios"
 import { URL_API } from "config"
 
 const TODO_LIST_URL = `${URL_API}/list`
-const getList = () => {
-  return Axios.get(TODO_LIST_URL)
+const getList = params => {
+  return Axios.get(TODO_LIST_URL, { params })
 }
 
 const create = data => {

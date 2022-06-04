@@ -3,6 +3,7 @@ import { Box } from "@mui/material"
 import Filters from "components/Filters"
 import FormTable from "components/FormTable"
 import ResponsiveAppBar from "components/ResponsiveAppBar"
+// import { Navigate } from "react-router"
 
 export default function Home(props) {
   const [open, setOpen] = useState(false)
@@ -16,6 +17,10 @@ export default function Home(props) {
     setOpen(false)
     setDataEdit({})
   }
+
+  // if (!props.user) {
+  //   return <Navigate to="/login" />
+  // }
 
   return (
     <>

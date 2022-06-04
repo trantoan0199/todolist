@@ -1,4 +1,5 @@
 export const SET_LIST_TODO = "todo/SET_LIST_TODO"
+export const SET_TOTAL_LIST_DODO = "todo/SET_TOTAL_LIST_DODO"
 export const SET_LOADING_LIST_TODO = "todo/SET_LOADING_LIST_TODO"
 export const ADD_DATA_TODO = "todo/ADD_DATA_TODO"
 export const DELETE_DATA_TODO = "todo/DELETE_DATA_TODO"
@@ -11,6 +12,13 @@ export const setListTodo = payload => {
   return {
     type: SET_LIST_TODO,
     payload
+  }
+}
+
+export const setTotalListTodo = value => {
+  return {
+    type: SET_TOTAL_LIST_DODO,
+    payload: value
   }
 }
 
